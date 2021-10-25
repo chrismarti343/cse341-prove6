@@ -1,5 +1,5 @@
 const path = require('path');
-
+const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -72,6 +72,12 @@ app.use(authRoutes);
 app.get('/500', errorController.get500);
 
 app.use(errorController.get404);
+
+const corsOptions = {
+  origin: "https://cse341-prove6.herokuapp.com/",
+  optionsSuccessStatus: 200
+  };
+app.use(cors(corsOptions));
 
 app.use((error, req, res, next) => {
   // res.status(error.httpStatusCode).render(...);
